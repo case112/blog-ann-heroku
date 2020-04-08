@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+{% if post.status == 1 or user.is_authenticated %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ post.cover_photo.url }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>{{ post.title }}</h1>
+          <h2 class="subheading">{{ post.overview }}</h2>
+          <span class="meta">Posted by
+            <a href="#">{{ post.author.user.username }}</a>
+            on {{ post.created_on|date:"F j, Y" }}</span>
+          {% if post.status == 0 and user.is_authenticated %}
+          <h1>[ DRAFT ]</h1>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<div class="container"> 
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto post-img">
+      {{ post.content | safe }}
+    </div>
+  </div>
+</div>
+  
+
+<div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="poscom blog-post col-lg-8 mx-auto"> 
+          
+             
+          <!-- Next and Previous Post -->
+          <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+            {% if previous_post %}
+            <a href="{% url 'post-detail' previous_post.slug %}" class="prev-post text-left d-flex align-items-center">
+            <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+            <div class="text">
+              <strong class="text-primary">Previous Post </strong>
+              <h6>{{ previous_post }}</h6>
+            </div></a>
+             {% else %}
+             <a href="." class="prev-post text-left d-flex align-items-center newest-post">
+              <div class="text">
+                <strong class="text-primary"> </strong>
+                <h6>This is the oldest post</h6>
+              </div></a>
+
+             {% endif %}
+
+             {% if next_post %}
+            <a href="{% url 'post-detail' next_post.slug %}" class="next-post text-right d-flex align-items-center justify-content-end">
+            <div class="text">
+              <strong class="text-primary">Next Post </strong>
+              <h6>{{ next_post }}</h6>
+            </div>
+            <div class="icon next"><i class="fa fa-angle-right"></i>
+            </div></a>
+             {% endif %}
+          </div>
+
+
+          <!-- Comments -->
+          <div class="post-comments">
+            {% if post.get_comments %}
+            <header>
+              <h3 class="h6">Comments<span class="no-of-comments">({{ post.get_comments.count }})</span></h3>
+            </header>
+            {% else %}
+            <h3 class="h6"><span ></span></h3>
+            {% endif %}
+             {% for comment in post.get_comments %}
+            <div class="comment">
+              <div class="comment-header d-flex justify-content-between">
+                <div class="user d-flex align-items-center">
+                  {% if comment.user != null %}
+                  <div class="image"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid rounded-circle"></div>
+                  {% else %}
+                  <div class="image"><img src="{% static 'img/comment.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                  {% endif %}
+                  {% if comment.user != null %}
+                  <div class="title"><strong class="comment-author">{{ post.author }}</strong>
+                  {% else %}
+                  <div class="title"><strong>{{ comment.name }}</strong>
+                  {% endif %}
+                    <span class="date">Commented on {{ comment.created_date|date:"d.m.y, G:i" }}</span></div>
+                </div>
+              </div>
+              <div class="comment-body">
+                <p>{{ comment.comment }}</p>
+              </div>
+            </div>
+             {% endfor %}
+          </div>
+         
+
+          <!-- Add Comments -->
+          <div class="add-comment" id='comment-view'>
+            {% if messages %}
+            
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} messages" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <header>
+              <h3 class="h6"><a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a comment</a></h3>
+            </header>
+            <div class="collapse" id="collapseExample">
+              <form method="POST" action="#comment-view" class="commenting-form">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    {{ form }}
+                  </div>
+                  <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                    <span class="no-of-comments"></span>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+          </div>
+
+        </main>
+      </div>
+    </div>
+</div>
+
+{% else %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>This post does not exist..</h1>
+          <h2 class="subheading"></h2>
+          <span class="meta">Go back 
+            <a href="/">home</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div style="height: 200px">
+</div>
+{% endif %}
+            
+          
+
+
+
+{% endblock content %}
