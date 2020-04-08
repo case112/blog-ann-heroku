@@ -1,6 +1,6 @@
-# Django Portfolio Blog [[Link]](http://nikopensius.ee "Link") 
+# Django Blog [[Link]](http://0000 "Link") 
 
-##### a simple blog made with Django Web Framework used as a portfolio to perview some of my work
+##### a simple blog made with Django Web Framework 
 
 ### Features
 
@@ -13,4 +13,3 @@
 - 2 factor validation for admin
 
 
-##### Deployed on DgitalOcean with Postgres, Nginx, and Gunicorn on Ubuntu 18.04
