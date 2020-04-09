@@ -14,7 +14,8 @@ urlpatterns = [
     path('about/', about),
     path('blog/', blog, name='post-list'),
     path('post/<slug>/', post, name='post-detail'),
-    path('tinymce/', include('tinymce.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from tinymce import HTMLField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 STATUS = (
     (0,"Draft"),
@@ -31,7 +31,7 @@ class Post(models.Model):
 	overview = models.TextField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
-	content = HTMLField(default="")
+	content = RichTextUploadingField()
 	author = models.ForeignKey(Author, on_delete=models.CASCADE)
 	thumbnail = models.ImageField()
 	cover_photo = models.ImageField()
@@ -75,7 +75,7 @@ class Comment(models.Model):
 class Page(models.Model):
 	cover_photo = models.ImageField()
 	name = models.CharField(max_length=300, null=True)
-	heading = models.CharField(max_length=300, null=True)
+	heading = models.CharField(max_length=300, blank=True)
 	subheading = models.CharField(max_length=300, blank=True)
 	meta = models.CharField(max_length=300, blank=True)
 	content = models.TextField(blank=True)

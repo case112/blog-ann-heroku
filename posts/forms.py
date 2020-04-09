@@ -1,20 +1,15 @@
 from django import forms
-from tinymce import TinyMCE
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from . models import Post, Comment
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
 
-class TinyMCEWidget(TinyMCE):
-	def use_required_attribute(self, *args):
-		return False
 
 class PostForm(forms.ModelForm):
-	content = forms.CharField(
-		widget=TinyMCEWidget(
-			attrs={'required': False, 'cols': 30, 'rows': 10}
-		)
-	)
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+
+
 
 class Meta:
 	model = Post
