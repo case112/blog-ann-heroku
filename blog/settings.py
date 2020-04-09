@@ -12,7 +12,7 @@ if os.path.isfile(dotenv_file):
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG')
 
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 
