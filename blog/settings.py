@@ -14,7 +14,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 
@@ -197,23 +197,6 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
-
 
 
 django_heroku.settings(locals())
