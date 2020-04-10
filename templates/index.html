@@ -17,13 +17,13 @@
     </div>
   </div>
 </header>
-{% endfor %}
 
 
 <!-- BLOG2 Featured posts -->
 <section class="featured-posts no-padding-top">
   <div class="container">
-    
+    {{ obj.content | safe }}
+    {% endfor %}
     <!-- Post-->
     {% for obj in object_list %}
     <div class="row d-flex align-items-stretch">
@@ -80,7 +80,7 @@
               <a>{{ cat.title }}</a>
               {% endfor %}
               </div>
-          </div><a href="#">
+          </div><a href="{{ obj.get_absolute_url }}">
             <h3 class="h4">{{ obj.title }}</h3></a>
           <p class="text-muted">{{ obj.overview }}</p>
         </div>
@@ -93,7 +93,7 @@
 
 <!-- Instagram feed -->
 <div class="container">
-    <center><h1><i class="fab fa-instagram"></i></h1></center>
+    <h1 class="centerInsta"><i class="fab fa-instagram"></i></h1>
     <div class="row">
     {% instagram_user_recent_media instagram_profile_name %}
     

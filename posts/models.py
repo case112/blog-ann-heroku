@@ -78,7 +78,7 @@ class Page(models.Model):
 	heading = models.CharField(max_length=300, blank=True)
 	subheading = models.CharField(max_length=300, blank=True)
 	meta = models.CharField(max_length=300, blank=True)
-	content = models.TextField(blank=True)
+	content = RichTextUploadingField(blank=True)
 
 
 	def __str__(self):

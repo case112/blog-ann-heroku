@@ -18,17 +18,17 @@
       </div>
     </div>
   </header>
-  {% endfor %}
+
 
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <img class="centerAboutImg" src="../../../../../media/profile1.png" alt="" />
-        <p>Some info about me.</p>
+        {{ obj.content | safe }}
       </div>
     </div>
   </div>
+  {% endfor %}
 
 
 
