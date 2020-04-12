@@ -15,6 +15,7 @@ def index(request):
 		'latest': latest,
 		'header': header,
 		'instagram_profile_name': 'anngretts',
+		'title': 'Home',
 	}
 	return render(request, 'index.html', context)
 
@@ -22,6 +23,7 @@ def contact(request):
 	header = Page.objects.filter(name="Contact")
 	context = {
 		'header': header,
+		'title': 'Contact',
 	}
 	return render(request, 'contact.html', context)
 
@@ -29,6 +31,7 @@ def about(request):
 	header = Page.objects.filter(name="About")
 	context = {
 		'header': header,
+		'title': 'About',
 	}
 	return render(request, 'about.html', context)
 
@@ -52,6 +55,7 @@ def blog(request):
 		'most_recent': most_recent,
 		'page_request_var': page_request_var,
 		'header': header,
+		'title': 'Blog',
 	}
 	return render(request, 'blog.html', context)
 
@@ -83,6 +87,7 @@ def post(request, slug):
 		'next_post': next_post,
 		'previous_post': previous_post,
 		'form': form,
+		'title': post.title,
 		})
 
 

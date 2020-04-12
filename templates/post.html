@@ -14,7 +14,7 @@
           <h1>{{ post.title }}</h1>
           <h2 class="subheading">{{ post.overview }}</h2>
           <span class="meta">Posted by
-            <a href="#">{{ post.author.user.username }}</a>
+            <a href="/about">{{ post.author.user.username }}</a>
             on {{ post.created_on|date:"F j, Y" }}</span>
           {% if post.status == 0 and user.is_authenticated %}
           <h1>[ DRAFT ]</h1>
